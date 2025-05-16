@@ -14,9 +14,15 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     
-    - name: Setup Rust
+    - name: Install Rust
+      uses: dtolnay/rust-toolchain@stable
+      with:
+        targets: aarch64-pc-windows-msvc
+    
+    - name: Check Rust installation
       run: |
-        rustup target add aarch64-pc-windows-msvc
+        rustc --version
+        cargo --version
         rustup show
     
     - name: Build
@@ -24,7 +30,7 @@ jobs:
     
     - name: List artifacts
       run: |
-        ls -la target/aarch64-pc-windows-msvc/release
+        Get-ChildItem -Path target/aarch64-pc-windows-msvc/release/ -Filter *.exe
     
     - name: Upload artifact
       uses: actions/upload-artifact@v4
