@@ -10,25 +10,25 @@ on:
 jobs:
   build:
     runs-on: windows-11-arm
-
+    
     steps:
-      - uses: actions/checkout@v3
-
-      - name: Setup Rust
-        run: |
-          rustup target add aarch64-pc-windows-msvc
-          rustup show
-
-      - name: Build
-        run: cargo build --release --target aarch64-pc-windows-msvc
-
-      - name: List artifacts
-        run: |
-          ls -la target/aarch64-pc-windows-msvc/release
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: windows-arm-binary
-          path: target/aarch64-pc-windows-msvc/release/*.exe
-          if-no-files-found: error
+    - uses: actions/checkout@v4
+    
+    - name: Setup Rust
+      run: |
+        rustup target add aarch64-pc-windows-msvc
+        rustup show
+    
+    - name: Build
+      run: cargo build --release --target aarch64-pc-windows-msvc
+    
+    - name: List artifacts
+      run: |
+        ls -la target/aarch64-pc-windows-msvc/release
+    
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: windows-arm-binary
+        path: target/aarch64-pc-windows-msvc/release/*.exe
+        if-no-files-found: error
